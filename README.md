@@ -4,7 +4,6 @@
 | 2410030030 | TGSS. Rohit   | A5      |
 | 2410030122 | T. Rishika    | A5      |
 | 2410030123 | Surabhi Sarda | A5      |
-| 2410030254 | B. Santosh    | A5      |
 | 2410030442 | Maruthi Reddy | A5      |
 
 # TriviaChamp
