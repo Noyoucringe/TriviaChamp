@@ -1,0 +1,2 @@
+# This app uses only Python standard library.
+# File present to help Render detect a Python Web Service.

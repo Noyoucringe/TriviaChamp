@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: triviachamp
+    env: python
+    rootDir: .
+    startCommand: python server.py

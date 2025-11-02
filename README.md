@@ -11,6 +11,16 @@ Features
 - Practice dashboard: daily goals, per-subject accuracy
 - Extras: typewriter subtitle, subject themes, achievements, recent activity
 
+## Team
+
+| Student ID | Student Name  | Section |
+| ---------- | ------------- | ------- |
+| 2410030128 | P. Anirudh    | A5      |
+| 2410030030 | TGSS. Rohit   | A5      |
+| 2410030122 | T. Rishika    | A5      |
+| 2410030123 | Surabhi Sarda | A5      |
+| 2410030442 | Maruthi Reddy | A5      |
+
 ## Run locally
 
 Option A: Open `index.html` directly (offline mode works; no shared leaderboard)
@@ -18,7 +28,7 @@ Option A: Open `index.html` directly (offline mode works; no shared leaderboard)
 Option B: Start the bundled Python server (serves static + APIs)
 
 ```powershell
-cd "c:\JAVA\TriviaChampWeb"
+cd "c:\\JAVA\\TriviaChampWeb"
 # optional: set a port (defaults to 8000)
 $env:PORT = '8000'
 python server.py
