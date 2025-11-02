@@ -1,0 +1,5 @@
+[
+  {"q":"What does RAM stand for?","a":"Random Access Memory","opts":["Readily Available Memory","Random Access Memory","Rapid Access Memory","Runtime Available Memory"]},
+  {"q":"What is the extension of a JavaScript file?","a":".js","opts":[".js",".java",".py",".jsx"]},
+  {"q":"Which HTML tag is used to include JS?","a":"<script>","opts":["<javascript>","<script>","<js>","<code>"]}
+]

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TriviaChamp Web</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20251102c" />
+</head>
+<body>
+  <header class="container">
+    <h1>TriviaChamp</h1>
+    <p class="subtitle" id="subtitle" data-phrases='["Practice offline","Play timed online","Per-subject leaderboards","Daily goals & streaks"]'>Practice offline or play online with timed questions.</p>
+  </header>
+
+  <main class="container" id="app">
+    <!-- Setup Screen -->
+    <section id="setup">
+      <form id="setup-form">
+        <div class="subject-tiles" role="radiogroup" aria-label="Choose a subject">
+          <button type="button" class="tile tile-math" data-category="19" aria-pressed="false">
+            <span class="emoji" aria-hidden="true">∑</span>
+            <span class="label">Math</span>
+          </button>
+          <button type="button" class="tile tile-cs" data-category="18" aria-pressed="false">
+            <span class="emoji" aria-hidden="true">💻</span>
+            <span class="label">CS</span>
+          </button>
+          <button type="button" class="tile tile-science" data-category="17" aria-pressed="false">
+            <span class="emoji" aria-hidden="true">🔬</span>
+            <span class="label">Science</span>
+          </button>
+          <button type="button" class="tile tile-history" data-category="23" aria-pressed="false">
+            <span class="emoji" aria-hidden="true">🏛️</span>
+            <span class="label">History</span>
+          </button>
+        </div>
+        <div class="features">
+          <span class="chip">Offline Practice</span>
+          <span class="chip">Timed Online</span>
+          <span class="chip">Leaderboard</span>
+          <span class="chip">Keys 1–4 pick subject</span>
+        </div>
+
+        <div class="grid">
+          <label>
+            <span>Your Name</span>
+            <input type="text" id="player-name" placeholder="Enter name" required />
+          </label>
+          <label>
+            <span>Mode</span>
+            <select id="mode">
+              <option value="offline">Offline</option>
+              <option value="online">Online</option>
+            </select>
+          </label>
+          <label>
+            <span>Subject</span>
+            <select id="category">
+              <option value="19">Math</option>
+              <option value="18">CS</option>
+              <option value="17">Science</option>
+              <option value="23">History</option>
+            </select>
+          </label>
+          <label id="difficulty-wrap">
+            <span>Difficulty</span>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </label>
+          <label id="offline-diff-toggle-wrap">
+            <span>Offline: Show Difficulty</span>
+            <input type="checkbox" id="offline-diff-toggle" />
+          </label>
+          <label id="num-questions-wrap">
+            <span>Number of Questions</span>
+            <select id="num-questions">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
+        <div class="actions">
+          <button type="submit" class="primary">Start</button>
+          <button type="button" id="quick-start" class="secondary" disabled>Quick Start</button>
+          <button type="button" id="daily-challenge" class="secondary">Daily Challenge</button>
+        </div>
+        <div id="last-settings" class="muted small"></div>
+      </form>
+      <!-- Practice dashboard fills the lower space of the setup card on desktop -->
+      <div id="practice-dash">
+        <h3 class="muted">Practice Goals</h3>
+        <div class="dash-grid goals">
+          <div class="mini-card">
+            <div class="mini-title">Answer 20 questions</div>
+            <div class="progress"><div class="bar" id="goal-answered"></div></div>
+            <div class="mini-note" id="goal-answered-note">0/20 today</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title">Score 10 points</div>
+            <div class="progress"><div class="bar" id="goal-score"></div></div>
+            <div class="mini-note" id="goal-score-note">0/10 today</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title">Play one online quiz</div>
+            <div class="progress"><div class="bar" id="goal-online"></div></div>
+            <div class="mini-note" id="goal-online-note">0/1 today</div>
+          </div>
+        </div>
+
+  <h3 class="muted" >Subject Focus</h3>
+        <div class="dash-grid subjects">
+          <div class="mini-card">
+            <div class="mini-title">Math</div>
+            <div class="progress small"><div class="bar" id="sub-19"></div></div>
+            <div class="mini-note" id="sub-19-note">0% accuracy</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title">CS</div>
+            <div class="progress small"><div class="bar" id="sub-18"></div></div>
+            <div class="mini-note" id="sub-18-note">0% accuracy</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title">Science</div>
+            <div class="progress small"><div class="bar" id="sub-17"></div></div>
+            <div class="mini-note" id="sub-17-note">0% accuracy</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title">History</div>
+            <div class="progress small"><div class="bar" id="sub-23"></div></div>
+            <div class="mini-note" id="sub-23-note">0% accuracy</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz Screen -->
+    <section id="quiz" class="hidden">
+      <div class="quiz-header">
+        <div id="status">
+          <span id="question-counter"></span>
+          <span id="timer" class="timer"></span>
+        </div>
+      </div>
+
+      <div id="question-area">
+        <h2 id="question-text">Question text</h2>
+        <ol id="options" class="options"></ol>
+      </div>
+
+      <div class="actions">
+        <button id="submit-answer" class="primary">Submit</button>
+        <button id="skip" class="secondary">Skip</button>
+        <button id="end-session" class="danger">End Session</button>
+      </div>
+    </section>
+
+    <!-- Results Screen -->
+    <section id="results" class="hidden">
+      <h2>Results</h2>
+      <p id="score-line"></p>
+      <div class="actions">
+        <button id="play-again" class="primary">Play again</button>
+        <button id="go-home" class="secondary">Home</button>
+      </div>
+    </section>
+
+    <!-- Leaderboard -->
+  <section id="leaderboard">
+      <h2 id="leaderboard-title">Leaderboard</h2>
+      <ul id="leaderboard-list"></ul>
+      <div class="actions">
+        <button id="clear-leaderboard" class="danger">Clear Leaderboard</button>
+        <button id="repair-leaderboards" class="secondary">Repair Leaderboards</button>
+      </div>
+    </section>
+
+    <!-- Home Aside: Stats, How-to, Shortcuts -->
+  <section id="home-aside">
+      <h2>Stats & Tips</h2>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num" id="stat-players">0</div>
+          <div class="stat-label">Players</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-top-score">0</div>
+          <div class="stat-label">Top Score</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-streak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+      </div>
+      <p class="muted small">Tip: Finish one quiz per day to build your streak.</p>
+      <details class="howto">
+        <summary>How to play</summary>
+        <ul>
+          <li>Pick a subject above or press 1–4.</li>
+          <li>Online mode is timed; offline is unlimited.</li>
+          <li>Scores are cumulative per name in the leaderboard.</li>
+        </ul>
+      </details>
+      <details class="shortcuts">
+        <summary>Shortcuts</summary>
+        <ul>
+          <li><strong>1–4</strong>: Select subject</li>
+          <li><strong>E</strong>: End session during quiz</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- Achievements -->
+  <section id="achievements">
+      <h2>Achievements</h2>
+      <div id="achv-badges" class="badges muted small">Play a quiz to start unlocking badges.</div>
+    </section>
+
+    <!-- Recent Activity -->
+  <section id="recent-activity">
+      <h2>Recent Activity</h2>
+      <ul id="recent-list" class="muted small"></ul>
+    </section>
+  </main>
+
+  <footer class="container muted">
+    
+  </footer>
+
+  <script src="app.js?v=20251102e" defer></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+*{box-sizing:border-box}
+:root{
+  --bg:#0f172a; /* slate-900 */
+  --panel:#111827; /* gray-900 */
+  --text:#e5e7eb; /* gray-200 */
+  --muted:#94a3b8; /* slate-400 */
+  --accent:#22c55e; /* green-500 */
+  --accent-2:#3b82f6; /* blue-500 */
+  --danger:#ef4444; /* red-500 */
+}
+html,body{min-height:100%}
+html{background-color:#0b1220}
+body{
+  margin:0;
+  /* Vibrant animated gradient for home (no theme class) */
+  background:conic-gradient(from 180deg at 50% 40%, #1e293b, #0ea5e9, #22c55e, #eab308, #ef4444, #1e293b);
+  background-attachment: fixed;
+  background-color:#0b1220; /* fallback to avoid white gaps on long pages */
+  color:var(--text); font-family:'Inter', system-ui, Segoe UI, Roboto, Ubuntu, Arial, sans-serif; line-height:1.5;
+  transition: background 400ms ease;
+  animation: bgShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgShift{
+  0%{ filter:hue-rotate(0deg) saturate(1.0); }
+  100%{ filter:hue-rotate(20deg) saturate(1.15); }
+}
+.container{max-width:1280px;margin:0 auto;padding:20px}
+header.container{padding:32px 20px}
+h1{margin:0 0 8px;font-size:36px;line-height:1.2; font-family:'Poppins', 'Inter', system-ui, Segoe UI, Roboto, Ubuntu, Arial, sans-serif;
+  background: linear-gradient(90deg, #ffffff, var(--accent-2), #ffffff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.container h2, .container h3{ font-family:'Poppins', 'Inter', system-ui, Segoe UI, Roboto, Ubuntu, Arial, sans-serif; }
+.subtitle{color:var(--muted);margin:0;font-weight:500}
+
+#setup, #quiz, #results, #leaderboard, #home-aside{
+  background:rgba(17,24,39,0.55);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:12px;
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+}
+/* New cards inherit same style */
+#achievements, #recent-activity{
+  background:rgba(17,24,39,0.55);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:12px;
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+label{display:flex;flex-direction:column;gap:6px}
+input, select{background:#0b1020;color:var(--text);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px}
+input:focus, select:focus{outline:none;border-color: var(--accent-2); box-shadow:0 0 0 3px rgba(59,130,246,0.25)}
+.options{list-style:decimal; padding-left:1.2rem}
+.options li{margin:10px 0;padding:12px 12px;border:1px solid rgba(255,255,255,0.12);border-radius:10px;cursor:pointer;transition: transform .08s ease, background .2s ease, box-shadow .2s ease}
+.options li.selected{background: linear-gradient(180deg, rgba(34,197,94,0.15), rgba(34,197,94,0.08)); border-color: rgba(34,197,94,0.4); box-shadow: 0 6px 18px rgba(34,197,94,0.12)}
+.options li:hover{background:rgba(255,255,255,0.04)}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+@media (max-width: 520px){
+  .actions{flex-wrap:wrap}
+}
+button{appearance:none;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;color:#fff;transition: transform .08s ease, box-shadow .2s ease, filter .2s ease}
+button.primary{background: linear-gradient(135deg, var(--accent-2), var(--accent)); box-shadow: 0 8px 20px rgba(59,130,246,0.25)}
+button.primary:hover{filter: brightness(1.08); transform: translateY(-1px)}
+button.secondary{background:#334155}
+button.danger{background:var(--danger)}
+button:disabled{opacity:.6;cursor:not-allowed}
+.hidden{display:none}
+.timer{margin-left:10px;color:#fbbf24}
+.quiz-header{display:flex;justify-content:space-between;align-items:center}
+#status{color:var(--muted)}
+.muted{color:var(--muted)}
+#leaderboard-list{padding-left:1rem}
+#leaderboard-list li{margin:6px 0}
+/* Home aside (stats, tips) */
+#home-aside .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 8px 0}
+#home-aside .stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:12px;text-align:center}
+#home-aside .stat-num{font-size:28px;font-weight:700}
+#home-aside .stat-label{font-size:12px;color:var(--muted)}
+#home-aside details{margin:8px 0}
+#home-aside summary{cursor:pointer}
+
+/* Practice dash inside setup card */
+#practice-dash{margin-top:12px}
+#practice-dash .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#practice-dash .mini-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:10px}
+#practice-dash .mini-title{font-weight:600;margin-bottom:6px}
+#practice-dash .mini-note{font-size:12px;color:var(--muted);margin-top:6px}
+.progress{height:12px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,0.12)}
+.progress.small{height:8px}
+.progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent-2),var(--accent));transition:width .4s ease}
+@media (max-width: 1100px){
+  #practice-dash .dash-grid{grid-template-columns:1fr}
+}
+/* Layout: place sections side-by-side on wide screens to use space */
+#app{display:grid;gap:12px}
+@media (min-width: 980px){
+  #app{grid-template-columns:1fr 1fr; align-items:start}
+  #setup{grid-column:1}
+  #leaderboard, #home-aside{grid-column:2}
+  #achievements, #recent-activity{grid-column:2}
+  #quiz, #results{grid-column:1 / -1}
+}
+
+/* Ultra-compact 3-column home layout on wide screens */
+/* Places panels side-by-side to avoid scrolling */
+@media (min-width: 1100px){
+  #setup{grid-area:setup}
+  #home-aside{grid-area:aside}
+  #achievements{grid-area:achv}
+  #leaderboard{grid-area:board}
+  #recent-activity{grid-area:recent}
+  #quiz{grid-area:quiz}
+  #app{grid-template-columns:1.1fr 0.9fr 0.9fr; grid-template-rows: 1fr 1fr; grid-template-areas:
+    'setup aside achv'
+    'setup board recent';
+    align-items:stretch;
+  }
+  /* Keep gameplay views full width */
+  #quiz, #results{grid-column:1 / -1}
+  /* Make right-column cards fill their grid cells */
+  #home-aside, #achievements, #leaderboard, #recent-activity{height:100%}
+  /* Allow internal scrolling if content exceeds the cell */
+  #leaderboard, #recent-activity, #achievements{overflow:auto}
+}
+
+/* During quiz: bring quiz bar to top, place four boxes under it in 2x2 grid */
+@media (min-width: 1100px){
+  body.quiz-active #app{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-areas:
+      'quiz quiz'
+      'aside achv'
+      'board recent';
+  }
+  body.quiz-active #setup{display:none}
+}
+
+/* Offline mode: hide leaderboard and reflow grid so there is no gap */
+@media (min-width: 1100px){
+  body.offline-mode #leaderboard{ display:none }
+  /* Home layout (not in quiz) */
+  body.offline-mode:not(.quiz-active) #app{
+    grid-template-columns:1.1fr 0.9fr 0.9fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      'setup aside achv'
+      'setup board board'; /* use board area for recent */
+  }
+  body.offline-mode:not(.quiz-active) #recent-activity{ grid-area: board }
+
+  /* Quiz layout while offline: put recent full width below second row */
+  body.offline-mode.quiz-active #app{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      'quiz quiz'
+      'aside achv'
+      'recent recent';
+  }
+  body.offline-mode.quiz-active #leaderboard{ display:none }
+}
+
+/* Feature chips under tiles */
+.features{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px 0}
+.chip{font-size:12px;color:#e5e7eb;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:6px 10px;border-radius:999px}
+.small{font-size:12px;margin-top:6px}
+
+/* Home-only enhancement when no subject theme is applied */
+body:not(.theme-cs):not(.theme-math):not(.theme-science):not(.theme-history) #setup,
+body:not(.theme-cs):not(.theme-math):not(.theme-science):not(.theme-history) #leaderboard,
+body:not(.theme-cs):not(.theme-math):not(.theme-science):not(.theme-history) #home-aside,
+body:not(.theme-cs):not(.theme-math):not(.theme-science):not(.theme-history) #achievements,
+body:not(.theme-cs):not(.theme-math):not(.theme-science):not(.theme-history) #recent-activity{
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 10px 40px rgba(14,165,233,0.18), 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Subject tiles */
+.subject-tiles{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:12px;margin:8px 0 16px 0}
+.subject-tiles .tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:84px;border-radius:14px;border:1px solid rgba(255,255,255,0.12);background:rgba(15,23,42,0.55);color:#fff;cursor:pointer;transition:transform .08s ease, box-shadow .2s ease, border-color .2s ease; -webkit-user-select:none; user-select:none}
+.subject-tiles .tile:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.35)}
+.subject-tiles .tile.selected{border-color: var(--accent-2); box-shadow:0 0 0 2px rgba(59,130,246,0.35) inset, 0 8px 22px rgba(59,130,246,0.18)}
+.subject-tiles .emoji{font-size:28px;line-height:1}
+.subject-tiles .label{font-weight:600}
+
+/* Per-subject tile accents */
+.tile-cs{ background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(6,182,212,0.10)); }
+.tile-math{ background: linear-gradient(135deg, rgba(16,185,129,0.18), rgba(34,197,94,0.10)); }
+.tile-science{ background: linear-gradient(135deg, rgba(20,184,166,0.18), rgba(132,204,22,0.10)); }
+.tile-history{ background: linear-gradient(135deg, rgba(245,158,11,0.18), rgba(239,68,68,0.10)); }
+
+@media (max-width: 560px){
+  .subject-tiles{grid-template-columns:repeat(2,minmax(120px,1fr))}
+}
+
+/* Subject themes: applied to <body> via JS */
+/* Defaults provide gentle contrast; each theme also tweaks accent colors */
+body.theme-cs{
+  /* Deep blue -> cyan glow */
+  --accent:#06b6d4; /* cyan-500 */
+  --accent-2:#3b82f6; /* blue-500 */
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='%23d1d5db' fill-opacity='0.08' font-family='Segoe UI Symbol,Arial' font-size='24'><text x='20' y='40'>{ }</text><text x='80' y='70'>&lt;/&gt;</text><text x='150' y='40'>01</text><text x='30' y='120'>;</text><text x='110' y='110'>if()</text><text x='165' y='140'>()</text></g></svg>"),
+    radial-gradient(1200px 500px at 80% -10%, rgba(56,189,248,0.15), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 400px at 10% 110%, rgba(59,130,246,0.18), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#0a1024,#0b152e 35%, #0a1226 60%, #07101f);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, auto;
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-color:#0a1024;
+}
+/* Panel tinting for stronger visual change */
+body.theme-cs #setup, body.theme-cs #quiz, body.theme-cs #results, body.theme-cs #leaderboard, body.theme-cs #home-aside,
+body.theme-cs #achievements, body.theme-cs #recent-activity{
+  border-color: rgba(59,130,246,0.30);
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.18) inset, 0 10px 30px rgba(59,130,246,0.08);
+}
+body.theme-math{
+  /* Emerald/green gradient */
+  --accent:#22c55e; /* green-500 */
+  --accent-2:#10b981; /* emerald-500 */
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='%23d1d5db' fill-opacity='0.08' font-family='Segoe UI Symbol,Arial' font-size='26'><text x='18' y='40'>+</text><text x='80' y='60'>−</text><text x='150' y='40'>×</text><text x='30' y='120'>÷</text><text x='110' y='110'>∫</text><text x='168' y='120'>π</text><text x='60' y='180'>=</text><text x='130' y='180'>%</text></g></svg>"),
+    radial-gradient(1000px 420px at 90% -10%, rgba(16,185,129,0.18), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 480px at 10% 110%, rgba(34,197,94,0.16), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#08140f,#0b1f17 35%, #0a1b15 60%, #07140f);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, auto;
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-color:#08140f;
+}
+body.theme-math #setup, body.theme-math #quiz, body.theme-math #results, body.theme-math #leaderboard, body.theme-math #home-aside,
+body.theme-math #achievements, body.theme-math #recent-activity{
+  border-color: rgba(16,185,129,0.28);
+  box-shadow: 0 0 0 1px rgba(16,185,129,0.16) inset, 0 10px 30px rgba(34,197,94,0.08);
+}
+body.theme-science{
+  /* Teal -> lime science vibe */
+  --accent:#14b8a6; /* teal-500 */
+  --accent-2:#84cc16; /* lime-500 */
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='%23d1d5db' fill-opacity='0.08' font-family='Segoe UI Symbol,Arial' font-size='24'><text x='20' y='40'>H2O</text><text x='95' y='60'>CO2</text><text x='160' y='40'>Δ</text><text x='30' y='120'>→</text><text x='115' y='115'>NaCl</text><text x='170' y='130'>O2</text></g></svg>"),
+    radial-gradient(1200px 500px at 80% -10%, rgba(20,184,166,0.18), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 400px at 10% 110%, rgba(132,204,22,0.14), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#081416,#0a1e22 35%, #091a1d 60%, #071417);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, auto;
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-color:#081416;
+}
+body.theme-science #setup, body.theme-science #quiz, body.theme-science #results, body.theme-science #leaderboard, body.theme-science #home-aside,
+body.theme-science #achievements, body.theme-science #recent-activity{
+  border-color: rgba(20,184,166,0.28);
+  box-shadow: 0 0 0 1px rgba(20,184,166,0.16) inset, 0 10px 30px rgba(132,204,22,0.08);
+}
+body.theme-history{
+  /* Warm amber -> maroon parchment vibe */
+  --accent:#f59e0b; /* amber-500 */
+  --accent-2:#ef4444; /* red-500 */
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='%23d1d5db' fill-opacity='0.08' font-family='Georgia,Times New Roman,serif' font-size='24'><text x='22' y='40'>AD</text><text x='90' y='60'>BC</text><text x='150' y='40'>XII</text><text x='30' y='120'>VII</text><text x='110' y='110'>IV</text><text x='170' y='130'>IX</text></g></svg>"),
+    radial-gradient(1100px 460px at 85% -10%, rgba(245,158,11,0.20), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 420px at 10% 110%, rgba(239,68,68,0.14), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#13100a,#1a150c 35%, #17120b 60%, #120e08);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, auto;
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-color:#13100a;
+}
+body.theme-history #setup, body.theme-history #quiz, body.theme-history #results, body.theme-history #leaderboard, body.theme-history #home-aside,
+body.theme-history #achievements, body.theme-history #recent-activity{
+  border-color: rgba(245,158,11,0.28);
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.16) inset, 0 10px 30px rgba(239,68,68,0.08);
+}
+
+/* Achievements styles */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.badge{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:rgba(255,255,255,0.04)}
+.badge .icon{font-size:20px}
+.badge.locked{opacity:.55;filter:grayscale(0.3)}
+
+/* Recent list */
+#recent-list{list-style:none;padding-left:0;margin:0}
+#recent-list li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.12)}
+
+/* Confetti effect */
+.confetti-piece{ position: fixed; top:-10px; width:10px; height:16px; border-radius:2px; opacity:0.9; pointer-events:none; z-index: 9999; animation: confettiFall 1200ms linear forwards; }
+@keyframes confettiFall{
+  0%{ transform: translateY(-20px) rotate(0deg); opacity: 0.9; }
+  80%{ opacity: 0.95; }
+  100%{ transform: translateY(110vh) rotate(720deg); opacity: 0.6; }
+}
